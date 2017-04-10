@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">RxRetrofitDaggerMvp</string>
+
+    <string name="main_tab_1">tab-1</string>
+    <string name="main_tab_2">tab-2</string>
+    <string name="main_tab_3">tab-3</string>
+    <string name="main_tab_4">tab-4</string>
+
+    <string name="error_net">请检查您的网络问题！</string>
+    <string name="error_url">请求地址错误</string>
+    <string name="error_user">账号异常</string>
+    <string name="error_data">数据异常</string>
+    <string name="load_error">加载失败，点击重试</string>
+
+    <!--头条，社会，国内，娱乐，体育，军事，科技，财经，时尚-->
+    <array name="home_tab">
+        <item>头条@toutiao</item>
+        <item>社会@shehui</item>
+        <item>国内@guonei</item>
+        <item>娱乐@yule</item>
+        <item>军事@junshi</item>
+        <item>科技@keji</item>
+        <item>财经@caijing</item>
+        <item>时尚@shishang</item>
+    </array>
+
+    <integer-array name="google_colors">
+        <item>@color/red</item>
+        <item>@color/blue</item>
+        <item>@color/yellow</item>
+        <item>@color/green</item>
+    </integer-array>
+
+</resources>
