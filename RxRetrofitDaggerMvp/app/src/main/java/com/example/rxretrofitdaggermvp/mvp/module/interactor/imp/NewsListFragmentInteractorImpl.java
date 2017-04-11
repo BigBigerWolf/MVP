@@ -6,6 +6,7 @@ import com.example.rxretrofitdaggermvp.mvp.module.entity.NewsInfo;
 import com.example.rxretrofitdaggermvp.mvp.module.interactor.NewsListFragmentInteractor;
 import com.example.rxretrofitdaggermvp.subsriber.ResponseSubscriber;
 import com.example.rxretrofitdaggermvp.utils.Constant;
+import com.example.rxretrofitdaggermvp.utils.LogUtil;
 
 import javax.inject.Inject;
 
@@ -20,11 +21,11 @@ import static com.example.rxretrofitdaggermvp.manager.HttpManager.getCacheContro
 
 public class NewsListFragmentInteractorImpl implements NewsListFragmentInteractor {
 
-    private final HttpManager httpManager;
+    @Inject
+    HttpManager httpManager;
 
     @Inject
     public NewsListFragmentInteractorImpl() {
-        httpManager = HttpManager.getInstance();
     }
 
     @Override

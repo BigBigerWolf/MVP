@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.rxretrofitdaggermvp.injector.Module.AppModule;
 import com.example.rxretrofitdaggermvp.injector.scope.PerApplication;
 import com.example.rxretrofitdaggermvp.manager.AppManager;
+import com.example.rxretrofitdaggermvp.manager.HttpManager;
 
 import dagger.Component;
 
@@ -15,10 +16,9 @@ import dagger.Component;
 @PerApplication
 @Component(modules = AppModule.class)
 public interface AppComponent {
-
-    //下层提供全局context
     Context getContext();
 
-    //下层提供全局对象
     AppManager getAppManager();
+
+    HttpManager getHttpManger();
 }

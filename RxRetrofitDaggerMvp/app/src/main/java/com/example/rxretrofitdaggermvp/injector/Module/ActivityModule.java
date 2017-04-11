@@ -13,7 +13,6 @@ import dagger.Provides;
 
 @Module
 public class ActivityModule {
-
     private Activity activity;
 
     public ActivityModule(Activity activity) {

@@ -31,5 +31,4 @@ public class Tab2Fragment extends BaseFragment {
     protected void initView(View contentView) {
         tvContent.setText(TAG);
     }
-
 }

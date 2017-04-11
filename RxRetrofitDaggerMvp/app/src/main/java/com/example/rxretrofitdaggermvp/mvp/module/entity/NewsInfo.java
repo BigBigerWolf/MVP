@@ -7,7 +7,6 @@ import java.util.List;
  */
 
 public class NewsInfo {
-
     private String stat;
     private List<DataBean> data;
 

@@ -3,8 +3,6 @@ package com.example.rxretrofitdaggermvp.manager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.ihsanbal.logging.Level;
-import com.ihsanbal.logging.LoggingInterceptor;
 import com.example.rxretrofitdaggermvp.BuildConfig;
 import com.example.rxretrofitdaggermvp.MyApp;
 import com.example.rxretrofitdaggermvp.mvp.module.entity.BaseResponse;
@@ -12,6 +10,8 @@ import com.example.rxretrofitdaggermvp.utils.ApiService;
 import com.example.rxretrofitdaggermvp.utils.Constant;
 import com.example.rxretrofitdaggermvp.utils.LogUtil;
 import com.example.rxretrofitdaggermvp.utils.Netutil;
+import com.ihsanbal.logging.Level;
+import com.ihsanbal.logging.LoggingInterceptor;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,26 +39,11 @@ import rx.schedulers.Schedulers;
 public class HttpManager {
     private OkHttpClient mOkHttpClient;
     private ApiService apiService;
-
-    /**
-     * 设缓存有效期为两天
-     */
     private static final long CACHE_STALE_SEC = 60 * 60 * 24 * 2;
-
-    /**
-     * 查询缓存的Cache-Control设置，为if-only-cache时只查询缓存而不会请求服务器，max-stale可以配合设置缓存失效时间
-     * max-stale 指示客户机可以接收超出超时期间的响应消息。如果指定max-stale消息的值，那么客户机可接收超出超时期指定值之内的响应消息。
-     */
     private static final String CACHE_CONTROL_CACHE = "only-if-cached, max-stale=" + CACHE_STALE_SEC;
-
-    /**
-     * 查询网络的Cache-Control设置，头部Cache-Control设为max-age=0
-     * (假如请求了服务器并在a时刻返回响应结果，则在max-age规定的秒数内，浏览器将不会发送对应的请求到服务器，数据由缓存直接返回)时则不会使用缓存而请求服务器
-     */
     private static final String CACHE_CONTROL_AGE = "max-age=0";
 
-
-    private HttpManager() {
+    public HttpManager() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constant.BASE_URL)
                 .client(getOkHttpClient())
                 .addConverterFactory(MyGsonConverterFactory.create())
@@ -71,21 +56,7 @@ public class HttpManager {
         return apiService;
     }
 
-    private static HttpManager httpManager;
-
-    public static HttpManager getInstance() {
-        if (httpManager == null) {
-            synchronized (HttpManager.class) {
-                if (httpManager == null) {
-                    httpManager = new HttpManager();
-                }
-            }
-        }
-        return httpManager;
-    }
-
     private OkHttpClient getOkHttpClient() {
-
         if (mOkHttpClient == null) {
             synchronized (HttpManager.class) {
                 Cache okHttpCache = new Cache(new File(MyApp.getAppContext().getCacheDir(), "OkHttpCache"), 1024 * 1024 * 100);
@@ -110,7 +81,6 @@ public class HttpManager {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-
             if (!Netutil.isNetworkAvailable()) {
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE)
@@ -146,7 +116,6 @@ public class HttpManager {
             .addHeader("version", BuildConfig.VERSION_NAME)
             .build();
 
-
     /**
      * 根据网络状况获取缓存的策略
      */
@@ -157,6 +126,7 @@ public class HttpManager {
 
     /**
      * 对Observable的二次封装
+     *
      * @param observable
      * @param subscriber
      * @param <T>
@@ -171,7 +141,7 @@ public class HttpManager {
     }
 
     /**
-     * 请求成功或失败的处理。
+     * 发射新的Observable
      *
      * @param <T>
      */

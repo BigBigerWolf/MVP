@@ -17,7 +17,6 @@ import dagger.Component;
 @PerFragment
 @Component(dependencies = AppComponent.class, modules = FragmentModule.class)
 public interface FragmentComponent {
-
     void inject(Tab1Fragment tab1Fragment);
 
     void inject(Tab3Fragment tab3Fragment);

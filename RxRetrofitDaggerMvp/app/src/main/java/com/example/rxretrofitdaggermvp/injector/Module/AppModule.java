@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.rxretrofitdaggermvp.injector.scope.PerApplication;
 import com.example.rxretrofitdaggermvp.manager.AppManager;
+import com.example.rxretrofitdaggermvp.manager.HttpManager;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,7 +15,6 @@ import dagger.Provides;
 
 @Module
 public class AppModule {
-
     private Context context;
 
     public AppModule(Context context) {
@@ -39,5 +39,15 @@ public class AppModule {
     @PerApplication
     AppManager provideAppManager() {
         return new AppManager(context);
+    }
+
+    /**
+     * 提供全局单例HttpManager
+     * @return
+     */
+    @Provides
+    @PerApplication
+    HttpManager provideHttpManager() {
+        return new HttpManager();
     }
 }

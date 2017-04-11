@@ -10,7 +10,5 @@ import java.util.List;
  */
 
 public interface MainView extends BaseView {
-
     void initTabHost(List<TabItem> items);
-
 }

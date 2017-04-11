@@ -23,11 +23,8 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AutoLayoutActivity implements BaseView {
-
     protected static String TAG;
-
     protected ActivityComponent activityComponent;
-
     protected BasePresenter basePresenter;
 
     @Inject
@@ -68,8 +65,7 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
         }
     }
 
-    protected void getBundle(Bundle bundle) {
-    }
+    protected void getBundle(Bundle bundle) {}
 
     protected abstract int getLayoutId();
 

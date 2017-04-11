@@ -26,5 +26,4 @@ public interface BaseView {
      * @param msg 错误信息
      */
     void showMessage(int errorCode, String msg);
-
 }

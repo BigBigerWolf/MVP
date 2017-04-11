@@ -10,10 +10,8 @@ import java.util.List;
  */
 
 public interface MainActivityInteractor {
-
     List<TabItem> getTabData();
 
     interface MainActivityRequestCallBack extends OnErrorCallBack {
-
     }
 }

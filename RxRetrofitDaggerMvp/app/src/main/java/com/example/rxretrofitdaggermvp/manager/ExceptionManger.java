@@ -2,9 +2,9 @@ package com.example.rxretrofitdaggermvp.manager;
 
 import android.net.ParseException;
 
-import com.google.gson.JsonParseException;
 import com.example.rxretrofitdaggermvp.MyApp;
 import com.example.rxretrofitdaggermvp.R;
+import com.google.gson.JsonParseException;
 
 import org.json.JSONException;
 
@@ -17,7 +17,6 @@ import retrofit2.adapter.rxjava.HttpException;
  */
 
 public class ExceptionManger {
-    //对应HTTP的状态码
     private static final int UNAUTHORIZED = 401;
     private static final int FORBIDDEN = 403;
     private static final int NOT_FOUND = 404;
@@ -96,5 +95,4 @@ public class ExceptionManger {
         public static final int NETWORD_ERROR = 1002;
         public static final int HTTP_ERROR = 1003;
     }
-
 }

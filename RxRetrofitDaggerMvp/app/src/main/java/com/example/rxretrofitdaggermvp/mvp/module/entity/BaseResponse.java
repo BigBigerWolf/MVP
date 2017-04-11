@@ -5,11 +5,8 @@ package com.example.rxretrofitdaggermvp.mvp.module.entity;
  */
 
 public class BaseResponse<T> {
-
     private String reason;
-
     private int error_code;
-
     private T result;
 
     public String getReason() {

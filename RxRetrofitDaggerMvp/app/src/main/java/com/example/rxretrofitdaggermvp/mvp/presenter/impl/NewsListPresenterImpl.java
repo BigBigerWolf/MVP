@@ -22,7 +22,8 @@ public class NewsListPresenterImpl extends BasePresenterImpl<NewsListView>
     NewsListFragmentInteractorImpl interactor;
 
     @Inject
-    public NewsListPresenterImpl(){}
+    public NewsListPresenterImpl() {
+    }
 
     @Override
     public void loadNews(String newsType) {

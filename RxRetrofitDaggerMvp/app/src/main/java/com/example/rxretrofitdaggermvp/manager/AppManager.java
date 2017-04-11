@@ -11,14 +11,12 @@ import java.util.List;
  */
 
 public class AppManager {
-
     private Context context;
+    private List<Activity> mActivities = new ArrayList<>();
 
     public AppManager(Context context) {
         this.context = context;
     }
-
-    private List<Activity> mActivities = new ArrayList<>();
 
     public void addAcitivty(Activity activity) {
         if (!mActivities.contains(activity)) {

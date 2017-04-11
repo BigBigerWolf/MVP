@@ -14,7 +14,6 @@ import dagger.Provides;
 
 @Module
 public class FragmentModule {
-
     private Fragment fragment;
 
     public FragmentModule(Fragment fragment) {
@@ -32,5 +31,4 @@ public class FragmentModule {
     Activity provideActivity() {
         return fragment.getActivity();
     }
-
 }

@@ -17,7 +17,6 @@ public class MainActivityPresenterImpl extends BasePresenterImpl<MainView> {
 
     @Inject
     public MainActivityPresenterImpl() {
-
     }
 
     @Override

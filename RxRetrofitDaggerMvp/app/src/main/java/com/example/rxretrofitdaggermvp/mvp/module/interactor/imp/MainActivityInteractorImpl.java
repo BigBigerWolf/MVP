@@ -20,18 +20,16 @@ import javax.inject.Inject;
 public class MainActivityInteractorImpl implements MainActivityInteractor {
 
     @Inject
-    public MainActivityInteractorImpl() {}
+    public MainActivityInteractorImpl() {
+    }
 
     @Override
     public List<TabItem> getTabData() {
-
         List<TabItem> tabItems = new ArrayList<>();
         tabItems.add(new TabItem(R.drawable.main_tab_1_up, R.drawable.main_tab_1_down, R.string.main_tab_1, Tab1Fragment.class));
         tabItems.add(new TabItem(R.drawable.main_tab_2_up, R.drawable.main_tab_2_down, R.string.main_tab_2, Tab2Fragment.class));
         tabItems.add(new TabItem(R.drawable.main_tab_3_up, R.drawable.main_tab_3_down, R.string.main_tab_3, Tab3Fragment.class));
         tabItems.add(new TabItem(R.drawable.main_tab_4_up, R.drawable.main_tab_4_down, R.string.main_tab_4, Tab4Fragment.class));
-
         return tabItems;
     }
-
 }

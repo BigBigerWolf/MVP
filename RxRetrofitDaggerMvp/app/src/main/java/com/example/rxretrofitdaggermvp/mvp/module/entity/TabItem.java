@@ -15,18 +15,11 @@ import com.example.rxretrofitdaggermvp.R;
  */
 
 public class TabItem {
-
-    //正常情况下显示的图片
     private int imageNormal;
-    //选中情况下显示的图片
     private int imagePress;
-    //tab的名字
     private int title;
     private String titleString;
-
-    //tab对应的fragment
     public Class<? extends Fragment> fragmentClass;
-
     public View view;
     public ImageView imageView;
     public TextView textView;

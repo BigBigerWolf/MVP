@@ -5,7 +5,5 @@ package com.example.rxretrofitdaggermvp.listener;
  */
 
 public interface OnErrorCallBack {
-
     void onError(int errorCode, String msg);
-
 }

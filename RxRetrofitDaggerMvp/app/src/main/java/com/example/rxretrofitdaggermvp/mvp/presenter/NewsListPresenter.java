@@ -5,6 +5,5 @@ package com.example.rxretrofitdaggermvp.mvp.presenter;
  */
 
 public interface NewsListPresenter {
-
     void loadNews(String newsType);
 }

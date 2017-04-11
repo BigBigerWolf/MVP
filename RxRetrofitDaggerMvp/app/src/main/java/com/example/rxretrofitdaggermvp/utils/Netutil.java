@@ -14,7 +14,6 @@ import com.example.rxretrofitdaggermvp.R;
 
 public class Netutil {
 
-
     /**
      * 检查当前网络是否可用
      *
@@ -32,15 +31,6 @@ public class Netutil {
                     return true;
                 }
             }
-        }
-        return false;
-    }
-
-    public static boolean isNetworkErrThenShowMsg() {
-        if (!isNetworkAvailable()) {
-            Toast.makeText(MyApp.getAppContext(), MyApp.getAppContext().getString(R.string.error_net),
-                    Toast.LENGTH_SHORT).show();
-            return true;
         }
         return false;
     }

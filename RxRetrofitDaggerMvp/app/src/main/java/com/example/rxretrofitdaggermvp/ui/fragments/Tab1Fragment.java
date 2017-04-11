@@ -39,6 +39,4 @@ public class Tab1Fragment extends BaseFragment {
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setupWithViewPager(viewPager);
     }
-
-
 }

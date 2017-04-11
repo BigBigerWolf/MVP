@@ -131,7 +131,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-        intent.putExtra(Intent.EXTRA_TEXT, "欢迎参观 撸啊撸啊");
+        intent.putExtra(Intent.EXTRA_TEXT, "欢迎参观 撸啊撸啊： https://github.com/itkong/MVP");
         startActivity(Intent.createChooser(intent, "通过"));
     }
 }

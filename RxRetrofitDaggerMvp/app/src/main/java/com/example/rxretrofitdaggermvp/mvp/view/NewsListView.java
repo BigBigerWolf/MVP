@@ -8,6 +8,5 @@ import com.example.rxretrofitdaggermvp.mvp.view.base.BaseView;
  */
 
 public interface NewsListView extends BaseView {
-
     void initNews(NewsInfo newsInfo);
 }

@@ -14,8 +14,6 @@ public interface NewsListFragmentInteractor {
     Subscription requestNewsList(String newsType, NewsListFragmentRequestCallBack callBack);
 
     interface NewsListFragmentRequestCallBack extends OnErrorCallBack {
-
         void onSucess(NewsInfo newsInfo);
-
     }
 }
