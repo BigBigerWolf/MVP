@@ -20,7 +20,7 @@ public abstract class BasePresenterImpl<T extends BaseView> implements BasePrese
     protected T view;
 
     /**
-     * for cancle multi subscribers.
+     *  for cancle multi subscribers.
      */
     protected List<Subscription> subForUnSubscribes = new ArrayList<>();
 
