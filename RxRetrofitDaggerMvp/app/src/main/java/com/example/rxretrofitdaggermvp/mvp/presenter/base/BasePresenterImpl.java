@@ -20,7 +20,7 @@ public abstract class BasePresenterImpl<T extends BaseView> implements BasePrese
     protected T view;
 
     /**
-     * 使用集合目的：一个界面多个请求，取消多个订阅。
+     * for cancle multi subscribers.
      */
     protected List<Subscription> subForUnSubscribes = new ArrayList<>();
 

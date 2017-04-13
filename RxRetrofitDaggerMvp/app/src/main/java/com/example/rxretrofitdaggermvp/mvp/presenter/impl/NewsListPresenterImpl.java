@@ -15,7 +15,7 @@ import rx.Subscription;
  * Created by MrKong on 2017/4/2.
  */
 
-public class NewsListPresenterImpl extends BasePresenterImpl<NewsListView>
+public class  NewsListPresenterImpl extends BasePresenterImpl<NewsListView>
         implements NewsListPresenter, NewsListFragmentInteractor.NewsListFragmentRequestCallBack {
 
     @Inject
