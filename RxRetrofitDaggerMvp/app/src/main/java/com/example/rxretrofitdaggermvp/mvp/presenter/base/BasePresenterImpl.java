@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by MrKong on 2017/4/1.
@@ -22,7 +23,7 @@ public abstract class BasePresenterImpl<T extends BaseView> implements BasePrese
     /**
      *  for cancle multi subscribers.
      */
-    protected List<Subscription> subForUnSubscribes = new ArrayList<>();
+    protected CompositeSubscription subForUnSubscribes;
 
     @Override
     public void setView(@NonNull BaseView baseView) {
@@ -33,11 +34,8 @@ public abstract class BasePresenterImpl<T extends BaseView> implements BasePrese
 
     @Override
     public void destroy() {
-        for (Subscription subscription :
-                subForUnSubscribes) {
-            if (subscription != null && subscription.isUnsubscribed()) {
-                subscription.unsubscribe();
-            }
+        if (subForUnSubscribes != null && subForUnSubscribes.isUnsubscribed()) {
+            subForUnSubscribes.unsubscribe();
         }
         subForUnSubscribes.clear();
     }

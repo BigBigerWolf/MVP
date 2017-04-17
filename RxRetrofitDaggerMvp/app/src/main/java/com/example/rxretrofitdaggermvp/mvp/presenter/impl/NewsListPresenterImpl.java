@@ -29,9 +29,7 @@ public class  NewsListPresenterImpl extends BasePresenterImpl<NewsListView>
     public void loadNews(String newsType) {
         view.onLoading();
         Subscription subscription = interactor.requestNewsList(newsType, this);
-        if (!subForUnSubscribes.contains(subscription)) {
-            subForUnSubscribes.add(subscription);
-        }
+        subForUnSubscribes.add(subscription);
     }
 
     @Override
