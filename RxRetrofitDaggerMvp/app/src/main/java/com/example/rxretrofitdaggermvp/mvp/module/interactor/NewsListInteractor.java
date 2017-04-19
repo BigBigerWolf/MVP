@@ -9,7 +9,7 @@ import rx.Subscription;
  * Created by MrKong on 2017/4/2.
  */
 
-public interface NewsListFragmentInteractor {
+public interface NewsListInteractor {
 
     Subscription requestNewsList(String newsType, NewsListFragmentRequestCallBack callBack);
 

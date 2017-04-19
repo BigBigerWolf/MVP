@@ -7,9 +7,9 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 
 import com.example.rxretrofitdaggermvp.R;
+import com.example.rxretrofitdaggermvp.mvp.contract.MainContract;
 import com.example.rxretrofitdaggermvp.mvp.module.entity.TabItem;
-import com.example.rxretrofitdaggermvp.mvp.presenter.impl.MainActivityPresenterImpl;
-import com.example.rxretrofitdaggermvp.mvp.view.MainView;
+import com.example.rxretrofitdaggermvp.mvp.presenter.impl.MainPresenterImpl;
 import com.example.rxretrofitdaggermvp.ui.activities.base.BaseActivity;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 
-public class MainActivity extends BaseActivity implements MainView {
+public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Bind(android.R.id.tabcontent)
     FrameLayout tabcontent;
@@ -29,7 +29,7 @@ public class MainActivity extends BaseActivity implements MainView {
     @Bind(R.id.toolBar)
     Toolbar toolBar;
     @Inject
-    MainActivityPresenterImpl mainActivityPresenterImpl;
+    MainPresenterImpl mainPresenterImpl;
 
     @Override
     protected int getLayoutId() {
@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     protected void initPresenter() {
-        basePresenter = mainActivityPresenterImpl;
+        basePresenter = mainPresenterImpl;
     }
 
     @Override

@@ -1,16 +1,18 @@
 package com.example.rxretrofitdaggermvp.ui.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.rxretrofitdaggermvp.R;
+import com.example.rxretrofitdaggermvp.mvp.contract.NewsListContract;
 import com.example.rxretrofitdaggermvp.mvp.module.entity.NewsInfo;
 import com.example.rxretrofitdaggermvp.mvp.presenter.impl.NewsListPresenterImpl;
-import com.example.rxretrofitdaggermvp.mvp.view.NewsListView;
 import com.example.rxretrofitdaggermvp.ui.activities.NewsDetailActivity;
 import com.example.rxretrofitdaggermvp.ui.adapters.NewsListAdapter;
 import com.example.rxretrofitdaggermvp.ui.fragments.base.BaseFragment;
@@ -30,7 +32,7 @@ import in.srain.cube.views.ptr.PtrHandler;
  * Created by MrKong on 2017/4/2.
  */
 public class NewsListFragment extends BaseFragment
-        implements NewsListView,
+        implements NewsListContract.View,
         BaseQuickAdapter.OnItemClickListener,
         PtrHandler,
         BaseQuickAdapter.OnItemLongClickListener {
@@ -39,6 +41,8 @@ public class NewsListFragment extends BaseFragment
     RecyclerView recyclerView;
     @Bind(R.id.ptr_frame)
     PtrClassicFrameLayout ptrFrame;
+    @Inject
+    Context context;
     @Inject
     Activity activity;
     @Inject

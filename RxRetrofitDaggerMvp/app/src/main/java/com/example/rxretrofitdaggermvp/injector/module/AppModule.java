@@ -1,4 +1,4 @@
-package com.example.rxretrofitdaggermvp.injector.Module;
+package com.example.rxretrofitdaggermvp.injector.module;
 
 import android.content.Context;
 

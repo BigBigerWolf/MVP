@@ -1,6 +1,6 @@
 package com.example.rxretrofitdaggermvp.injector.component;
 
-import com.example.rxretrofitdaggermvp.injector.Module.FragmentModule;
+import com.example.rxretrofitdaggermvp.injector.module.FragmentModule;
 import com.example.rxretrofitdaggermvp.injector.scope.PerFragment;
 import com.example.rxretrofitdaggermvp.ui.fragments.NewsListFragment;
 import com.example.rxretrofitdaggermvp.ui.fragments.Tab1Fragment;

@@ -9,7 +9,7 @@ import java.util.List;
  * Created by MrKong on 2017/4/1.
  */
 
-public interface MainActivityInteractor {
+public interface MainInteractor {
     List<TabItem> getTabData();
 
     interface MainActivityRequestCallBack extends OnErrorCallBack {

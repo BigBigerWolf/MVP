@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.example.rxretrofitdaggermvp.MyApp;
 import com.example.rxretrofitdaggermvp.R;
-import com.example.rxretrofitdaggermvp.injector.Module.ActivityModule;
+import com.example.rxretrofitdaggermvp.injector.module.ActivityModule;
 import com.example.rxretrofitdaggermvp.injector.component.ActivityComponent;
 import com.example.rxretrofitdaggermvp.injector.component.DaggerActivityComponent;
 import com.example.rxretrofitdaggermvp.manager.AppManager;

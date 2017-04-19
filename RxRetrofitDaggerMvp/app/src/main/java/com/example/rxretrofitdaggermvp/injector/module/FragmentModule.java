@@ -1,4 +1,4 @@
-package com.example.rxretrofitdaggermvp.injector.Module;
+package com.example.rxretrofitdaggermvp.injector.module;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;

@@ -1,7 +1,5 @@
 package com.example.rxretrofitdaggermvp.mvp.presenter.base;
 
-import android.support.annotation.NonNull;
-
 import com.example.rxretrofitdaggermvp.listener.OnErrorCallBack;
 import com.example.rxretrofitdaggermvp.mvp.view.base.BaseView;
 import com.example.rxretrofitdaggermvp.utils.Constant;
@@ -10,32 +8,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by MrKong on 2017/4/1.
  */
 
-public abstract class BasePresenterImpl<T extends BaseView> implements BasePresenter, OnErrorCallBack {
+public abstract class BasePresenterImpl<T extends BaseView> implements BasePresenter<T>, OnErrorCallBack {
 
     protected T view;
 
     /**
      *  for cancle multi subscribers.
      */
-    protected CompositeSubscription subForUnSubscribes;
+    protected List<Subscription> subForUnSubscribes = new ArrayList<>();
 
     @Override
-    public void setView(@NonNull BaseView baseView) {
-        view = (T) baseView;
+    public void setView(T baseView) {
+        view = baseView;
     }
 
     public abstract void initialize();
 
     @Override
     public void destroy() {
-        if (subForUnSubscribes != null && subForUnSubscribes.isUnsubscribed()) {
-            subForUnSubscribes.unsubscribe();
+        for (Subscription subscription :
+                subForUnSubscribes) {
+            if (subscription != null && !subscription.isUnsubscribed()) {
+                subscription.unsubscribe();
+            }
         }
         subForUnSubscribes.clear();
     }

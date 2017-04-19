@@ -2,7 +2,7 @@ package com.example.rxretrofitdaggermvp.mvp.module.interactor.imp;
 
 import com.example.rxretrofitdaggermvp.R;
 import com.example.rxretrofitdaggermvp.mvp.module.entity.TabItem;
-import com.example.rxretrofitdaggermvp.mvp.module.interactor.MainActivityInteractor;
+import com.example.rxretrofitdaggermvp.mvp.module.interactor.MainInteractor;
 import com.example.rxretrofitdaggermvp.ui.fragments.Tab1Fragment;
 import com.example.rxretrofitdaggermvp.ui.fragments.Tab2Fragment;
 import com.example.rxretrofitdaggermvp.ui.fragments.Tab3Fragment;
@@ -17,10 +17,10 @@ import javax.inject.Inject;
  * Created by MrKong on 2017/4/1.
  */
 
-public class MainActivityInteractorImpl implements MainActivityInteractor {
+public class MainInteractorImpl implements MainInteractor {
 
     @Inject
-    public MainActivityInteractorImpl() {
+    public MainInteractorImpl() {
     }
 
     @Override

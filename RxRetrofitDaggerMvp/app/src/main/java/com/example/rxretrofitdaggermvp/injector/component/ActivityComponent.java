@@ -1,6 +1,6 @@
 package com.example.rxretrofitdaggermvp.injector.component;
 
-import com.example.rxretrofitdaggermvp.injector.Module.ActivityModule;
+import com.example.rxretrofitdaggermvp.injector.module.ActivityModule;
 import com.example.rxretrofitdaggermvp.injector.scope.PerActivity;
 import com.example.rxretrofitdaggermvp.ui.activities.MainActivity;
 import com.example.rxretrofitdaggermvp.ui.activities.NewsDetailActivity;

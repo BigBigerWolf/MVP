@@ -2,7 +2,7 @@ package com.example.rxretrofitdaggermvp.injector.component;
 
 import android.content.Context;
 
-import com.example.rxretrofitdaggermvp.injector.Module.AppModule;
+import com.example.rxretrofitdaggermvp.injector.module.AppModule;
 import com.example.rxretrofitdaggermvp.injector.scope.PerApplication;
 import com.example.rxretrofitdaggermvp.manager.AppManager;
 import com.example.rxretrofitdaggermvp.manager.HttpManager;
