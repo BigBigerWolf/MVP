@@ -8,7 +8,7 @@ import rx.Subscriber;
 /**
  * Created by MrKong on 2017/4/2.
  */
-
+//处理成功失败的回调数据
 public abstract class ResponseSubscriber<T> extends Subscriber<T> {
 
     private OnErrorCallBack onErrorCallBack;

@@ -3,7 +3,7 @@ package com.example.rxretrofitdaggermvp.mvp.module.entity;
 /**
  * Created by MrKong on 2017/4/2.
  */
-
+//响应结果基类
 public class BaseResponse<T> {
     private String reason;
     private int error_code;

@@ -27,6 +27,14 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.rxretrofitdaggermvp.ui.activities.NewsDetailActivity"></activity>
+
+        <receiver
+            android:name=".reciever.NetReciever"
+            android:label="NetworkConnection">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

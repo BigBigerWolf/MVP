@@ -120,7 +120,7 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
 
     @Override
     public void goToLogin() {
-//        readyGo(LoginActivity.class);
+        //readyGo(LoginActivity.class);
     }
 
     @Override

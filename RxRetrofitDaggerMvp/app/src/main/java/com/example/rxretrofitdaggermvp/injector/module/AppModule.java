@@ -12,7 +12,7 @@ import dagger.Provides;
 /**
  * Created by MrKong on 2017/4/1.
  */
-
+//提供App生命周期内有效的对象
 @Module
 public class AppModule {
     private Context context;
@@ -20,6 +20,10 @@ public class AppModule {
     public AppModule(Context context) {
         this.context = context;
     }
+
+    //↓↓↓这里提供的对象可以在依赖AppComponent的所有Component注入的对象中使用
+    // 比如（ActivityComponent，FragmentComponent中inject的对象）
+    // 自然这里限制的单例，全局有效。
 
     /**
      * 提供全局单例context

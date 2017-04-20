@@ -10,7 +10,7 @@ import dagger.Provides;
 /**
  * Created by MrKong on 2017/4/1.
  */
-
+//同Fragment~
 @Module
 public class ActivityModule {
     private Activity activity;

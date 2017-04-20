@@ -10,6 +10,7 @@ import java.util.List;
  * Created by "MrKong" on 2017/4/19.
  */
 
+//管理View和Presenter的契约接口
 public interface MainContract {
 
     interface View extends BaseView {

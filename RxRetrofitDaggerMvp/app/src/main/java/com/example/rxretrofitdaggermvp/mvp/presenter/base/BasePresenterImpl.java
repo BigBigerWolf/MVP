@@ -12,7 +12,7 @@ import rx.Subscription;
 /**
  * Created by MrKong on 2017/4/1.
  */
-
+//相同逻辑的统一处理
 public abstract class BasePresenterImpl<T extends BaseView> implements BasePresenter<T>, OnErrorCallBack {
 
     protected T view;

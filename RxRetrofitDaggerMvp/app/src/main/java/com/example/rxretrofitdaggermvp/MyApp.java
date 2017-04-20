@@ -23,6 +23,9 @@ public class MyApp extends Application {
         initComponent();
     }
 
+    /**
+     * 全局初始化AppComponent
+     */
     private void initComponent() {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
