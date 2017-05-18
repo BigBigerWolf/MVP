@@ -2,9 +2,11 @@ package com.example.rxretrofitdaggermvp.ui.activities;
 
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TabHost;
 import android.widget.TabWidget;
+import android.widget.Toast;
 
 import com.example.rxretrofitdaggermvp.R;
 import com.example.rxretrofitdaggermvp.mvp.contract.MainContract;
@@ -17,6 +19,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
 
@@ -57,6 +61,30 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             tabhost.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.main_bottom_bg));
         }
         tabItems.get(0).setChecked(true);
+        new QBadgeView(this)
+                .bindTarget(tabItems.get(0).getView(this))
+                .setBadgePadding(3, true)
+                .setBadgeNumber(100)
+                .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+                    @Override
+                    public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+                        switch (dragState) {
+                            case STATE_SUCCEED:
+                                Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
+                                break;
+                            case STATE_CANCELED:
+                                Toast.makeText(MainActivity.this, "cancle", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                });
+        tabItems.get(2).getView(this).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         tabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String s) {

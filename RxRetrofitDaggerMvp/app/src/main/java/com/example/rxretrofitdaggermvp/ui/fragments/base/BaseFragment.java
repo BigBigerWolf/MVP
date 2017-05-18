@@ -1,5 +1,6 @@
 package com.example.rxretrofitdaggermvp.ui.fragments.base;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,8 @@ import com.example.rxretrofitdaggermvp.injector.component.FragmentComponent;
 import com.example.rxretrofitdaggermvp.mvp.presenter.base.BasePresenter;
 import com.example.rxretrofitdaggermvp.mvp.view.base.BaseView;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 
 /**
@@ -30,6 +33,9 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     protected BasePresenter basePresenter;
     protected boolean isVisible;
     protected String TAG;
+
+    @Inject
+    Activity activity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,12 +124,12 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     }
 
     protected void readyGo(Class<?> clazz) {
-        Intent intent = new Intent(getActivity(), clazz);
+        Intent intent = new Intent(activity, clazz);
         startActivity(intent);
     }
 
     protected void readyGo(Class<?> clazz, Bundle bundle) {
-        Intent intent = new Intent(getActivity(), clazz);
+        Intent intent = new Intent(activity, clazz);
         if (null != bundle) {
             intent.putExtras(bundle);
         }
@@ -132,6 +138,6 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void showMessage(int errorCode, String msg) {
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
     }
 }

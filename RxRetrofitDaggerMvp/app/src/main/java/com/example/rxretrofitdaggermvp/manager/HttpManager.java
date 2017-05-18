@@ -134,61 +134,33 @@ public class HttpManager {
      */
     public <T> Subscription getSubscribtion(Observable<BaseResponse<T>> observable, Subscriber<T> subscriber) {
         return observable
-                .compose(this.<BaseResponse<T>>defaultSchedulers())
-                .flatMap(new FunBaseResponse<T>())
-                .retryWhen(new RetryMechanism())
-                .subscribe(subscriber);
-    }
-
-    /**
-     * 发射新的Observable
-     *
-     * @param <T>
-     */
-    private static class FunBaseResponse<T> implements Func1<BaseResponse<T>, Observable<T>> {
-        @Override
-        public Observable<T> call(BaseResponse<T> baseResResponse) {
-            return Observable.just(baseResResponse.getResult());
-        }
-    }
-
-    /**
-     * 默认订阅线程调度
-     *
-     * @param <T>
-     * @return
-     */
-    private <T> Observable.Transformer<T, T> defaultSchedulers() {
-        return new Observable.Transformer<T, T>() {
-            @Override
-            public Observable<T> call(Observable<T> observable) {
-                return observable
-                        .subscribeOn(Schedulers.io())
-                        .unsubscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-    }
-
-    /**
-     * 实现Rx重试机制
-     */
-    private static class RetryMechanism implements Func1<Observable<? extends Throwable>, Observable<?>> {
-        @Override
-        public Observable<?> call(Observable<? extends Throwable> observable) {
-            return observable.flatMap(new Func1<Throwable, Observable<?>>() {
-                @Override
-                public Observable<?> call(Throwable throwable) {
-                    if (throwable instanceof ExceptionManger.ServerException) {
-                        ExceptionManger.ServerException serverException = (ExceptionManger.ServerException) throwable;
-                        LogUtil.e(serverException.code + serverException.message);
-                        if (serverException.code == Constant.TOKENTIMEOUT) {
-                            // TODO: 2017/3/31  在这里可以启用token过期，静默登陆机制；
-                        }
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new Func1<BaseResponse<T>, Observable<T>>() {
+                    @Override
+                    public Observable<T> call(BaseResponse<T> baseResponse) {
+                        return Observable.just(baseResponse.getResult());
                     }
-                    return Observable.error(throwable);
-                }
-            });
-        }
+                })
+                .retryWhen(new Func1<Observable<? extends Throwable>, Observable<?>>() {
+                    @Override
+                    public Observable<?> call(Observable<? extends Throwable> observable) {
+                        return observable.flatMap(new Func1<Throwable, Observable<?>>() {
+                            @Override
+                            public Observable<?> call(Throwable throwable) {
+                                if (throwable instanceof ExceptionManger.ServerException) {
+                                    ExceptionManger.ServerException serverException = (ExceptionManger.ServerException) throwable;
+                                    LogUtil.e(serverException.code + serverException.message);
+                                    if (serverException.code == Constant.TOKENTIMEOUT) {
+                                        // TODO: 2017/3/31  在这里可以启用token过期，静默登陆机制；
+                                    }
+                                }
+                                return Observable.error(throwable);
+                            }
+                        });
+                    }
+                })
+                .subscribe(subscriber);
     }
 }

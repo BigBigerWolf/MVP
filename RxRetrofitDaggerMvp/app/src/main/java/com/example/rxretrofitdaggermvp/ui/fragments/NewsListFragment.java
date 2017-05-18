@@ -114,7 +114,7 @@ public class NewsListFragment extends BaseFragment
 
     private void initRecylerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        recyclerView.setAdapter(newsListAdapter);
+        newsListAdapter.bindToRecyclerView(recyclerView);
         newsListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         newsListAdapter.isFirstOnly(false);
         newsListAdapter.setOnItemClickListener(this);
