@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     Toolbar toolBar;
     @Inject
     MainPresenterImpl mainPresenterImpl;
+    private QBadgeView qBadgeView;
 
     @Override
     protected int getLayoutId() {
@@ -61,9 +62,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             tabhost.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.main_bottom_bg));
         }
         tabItems.get(0).setChecked(true);
-        new QBadgeView(this)
-                .bindTarget(tabItems.get(0).getView(this))
+        qBadgeView = new QBadgeView(this);
+        qBadgeView
+                .bindTarget(tabItems.get(3).getView(this))
                 .setBadgePadding(3, true)
+                .setGravityOffset(8, true)
                 .setBadgeNumber(100)
                 .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
                     @Override
@@ -92,6 +95,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     TabItem tabitem = tabItems.get(i);
                     if (s.equals(tabitem.getTitleString())) {
                         tabitem.setChecked(true);
+                        if (i == 3) {
+                            qBadgeView.hide(true);
+                        }
                     } else {
                         tabitem.setChecked(false);
                     }
