@@ -1,9 +1,7 @@
 # MVP
 A News Demo For MVP used RxJava+Retrofit2+Dagger2。
 ![](https://github.com/itkong/MVP/blob/master/Pictures/p1.png)
-
 ![](https://github.com/itkong/MVP/blob/master/Pictures/p2.png)
-
 ### 简介
 	对Dagger2的简单运用，配合Mvp实现最大程度解藕。
 	简单封装RxJava配合Retrofit2，完成便利的网络请求。
