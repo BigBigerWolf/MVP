@@ -50,6 +50,7 @@ public class NewsListFragment extends BaseFragment
     @Inject
     NewsListAdapter newsListAdapter;
     private boolean isPrepared;
+    private List<NewsInfo.DataBean> newData;
 
     @Override
     protected int getLayoutId() {
@@ -72,13 +73,14 @@ public class NewsListFragment extends BaseFragment
 
     @Override
     public void initNews(NewsInfo newsInfo) {
-        newsListAdapter.setNewData(newsInfo.getData());
+        newData = newsInfo.getData();
+        newsListAdapter.setNewData(newData);
     }
 
     @Override
     protected void onLazyLoad() {
         super.onLazyLoad();
-        if (isPrepared && isVisible) {
+        if (isPrepared && isVisible && newData == null) {
             onLoading();
         }
     }
