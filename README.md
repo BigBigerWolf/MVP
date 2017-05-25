@@ -42,4 +42,5 @@ A News Demo For MVP used RxJava+Retrofit2+Dagger2。
 ### 配置请求，响应[拦截打印器](https://github.com/ihsanbal/LoggingInterceptor)
 ### 封装debug模式的[Logger](https://github.com/orhanobut/logger)
 ### RecyclerView配合[BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)实现简洁的adapter
+### 暴力方式解决webview造成的内存泄漏
 	

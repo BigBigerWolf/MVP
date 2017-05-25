@@ -6,6 +6,7 @@ import android.content.Context;
 import com.example.rxretrofitdaggermvp.injector.module.AppModule;
 import com.example.rxretrofitdaggermvp.injector.component.AppComponent;
 import com.example.rxretrofitdaggermvp.injector.component.DaggerAppComponent;
+import com.squareup.leakcanary.LeakCanary;
 
 /**
  * Created by MrKong on 2017/4/1.
@@ -21,6 +22,16 @@ public class MyApp extends Application {
         super.onCreate();
         context = this;
         initComponent();
+        initLeakCanary();
+    }
+
+    private void initLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     /**

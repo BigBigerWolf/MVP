@@ -15,13 +15,18 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.example.rxretrofitdaggermvp.R;
 import com.example.rxretrofitdaggermvp.ui.activities.base.BaseActivity;
+import com.example.rxretrofitdaggermvp.ui.customviews.ChromeFloatingCirclesDrawable;
 
 import butterknife.Bind;
 
+/**
+ * 解决webView导致的内存泄漏
+ */
 public class NewsDetailActivity extends BaseActivity implements View.OnClickListener, Toolbar.OnMenuItemClickListener {
 
     @Bind(R.id.backImage)
@@ -32,6 +37,8 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     CollapsingToolbarLayout collapsingToolBar;
     @Bind(R.id.webView)
     WebView webView;
+    @Bind(R.id.loading_progress)
+    ProgressBar progressBar;
     @Bind(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
     private String backImageUrl;
@@ -66,6 +73,12 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
                 .load(backImageUrl)
                 .into(backImage);
 
+        ChromeFloatingCirclesDrawable chromeFloatingCirclesDrawable = (ChromeFloatingCirclesDrawable) new ChromeFloatingCirclesDrawable
+                .Builder(this)
+                .colors(getResources().getIntArray(R.array.google_colors))
+                .build();
+        progressBar.setIndeterminateDrawable(chromeFloatingCirclesDrawable);
+
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
@@ -78,6 +91,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
             //加载完毕回调
             @Override
             public void onPageFinished(WebView view, String url) {
+                progressBar.setVisibility(View.GONE);
                 super.onPageFinished(view, url);
             }
 
@@ -133,5 +147,11 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
         intent.putExtra(Intent.EXTRA_TEXT, "欢迎参观 撸啊撸啊： https://github.com/itkong/MVP");
         startActivity(Intent.createChooser(intent, "通过"));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.exit(0);
     }
 }
