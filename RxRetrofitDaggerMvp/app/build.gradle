@@ -12,6 +12,17 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            storeFile file('MVP.jks')
+            storePassword "123456"
+            keyAlias "MVP"
+            keyPassword "123456"
+
+            v1SigningEnabled false
+            v2SigningEnabled false
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false

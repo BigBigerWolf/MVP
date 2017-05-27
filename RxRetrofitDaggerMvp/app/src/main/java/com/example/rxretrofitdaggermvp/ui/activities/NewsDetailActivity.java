@@ -7,10 +7,15 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.example.rxretrofitdaggermvp.R;
 import com.example.rxretrofitdaggermvp.ui.activities.base.BaseActivity;
 import com.example.rxretrofitdaggermvp.ui.customviews.ChromeFloatingCirclesDrawable;
+import com.example.rxretrofitdaggermvp.utils.LogUtil;
 
 import butterknife.Bind;
 
@@ -43,6 +49,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     CoordinatorLayout coordinatorLayout;
     private String backImageUrl;
     private String detailUrl;
+    private WebSettings settings;
 
     @Override
     protected int getLayoutId() {
@@ -69,6 +76,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initViews() {
+
         Glide.with(this)
                 .load(backImageUrl)
                 .into(backImage);
@@ -79,7 +87,12 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
                 .build();
         progressBar.setIndeterminateDrawable(chromeFloatingCirclesDrawable);
 
-        WebSettings settings = webView.getSettings();
+        settings = webView.getSettings();
+        if (Build.VERSION.SDK_INT >= 19) {
+            settings.setLoadsImagesAutomatically(true);
+        } else {
+            settings.setLoadsImagesAutomatically(false);
+        }
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
         settings.setBuiltInZoomControls(true);
@@ -92,7 +105,14 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onPageFinished(WebView view, String url) {
                 progressBar.setVisibility(View.GONE);
+                settings.setLoadsImagesAutomatically(true);
                 super.onPageFinished(view, url);
+            }
+
+            //失败回调
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
             }
 
             @Override
