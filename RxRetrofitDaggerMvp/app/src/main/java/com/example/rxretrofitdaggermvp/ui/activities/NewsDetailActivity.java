@@ -91,7 +91,9 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
             //加载完毕回调
             @Override
             public void onPageFinished(WebView view, String url) {
-                progressBar.setVisibility(View.GONE);
+                if (progressBar != null) {
+                    progressBar.setVisibility(View.GONE);
+                }
                 super.onPageFinished(view, url);
             }
 
