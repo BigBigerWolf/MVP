@@ -66,17 +66,23 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
         tabItems.get(0).setChecked(true);
 
-        View view = tabhost.getTabWidget().getChildTabViewAt(0);
-        new MyClickListener(view)
-                .setOnClickListener(new MyClickListener.OnClickListener() {
+        tabhost.getTabWidget().getChildTabViewAt(2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        View view = tabhost.getTabWidget().getChildTabViewAt(0);
+        new MyClickListener(2, view)
+                .setOnClickListener(new MyClickListener.OnClickListener() {
                     @Override
                     public void onSinleClick() {
                         tabhost.setCurrentTab(0);
                     }
 
                     @Override
-                    public void onDoubleClick() {
+                    public void onMultiClick() {
                         EventBus.getDefault().post(new EventBus());
                     }
                 });
