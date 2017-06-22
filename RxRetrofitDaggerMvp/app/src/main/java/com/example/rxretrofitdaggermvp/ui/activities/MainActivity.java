@@ -13,6 +13,9 @@ import com.example.rxretrofitdaggermvp.mvp.contract.MainContract;
 import com.example.rxretrofitdaggermvp.mvp.module.entity.TabItem;
 import com.example.rxretrofitdaggermvp.mvp.presenter.impl.MainPresenterImpl;
 import com.example.rxretrofitdaggermvp.ui.activities.base.BaseActivity;
+import com.example.rxretrofitdaggermvp.utils.MyClickListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -62,6 +65,22 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             tabhost.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.main_bottom_bg));
         }
         tabItems.get(0).setChecked(true);
+
+        View view = tabhost.getTabWidget().getChildTabViewAt(0);
+        new MyClickListener(view)
+                .setOnClickListener(new MyClickListener.OnClickListener() {
+
+                    @Override
+                    public void onSinleClick() {
+                        tabhost.setCurrentTab(0);
+                    }
+
+                    @Override
+                    public void onDoubleClick() {
+                        EventBus.getDefault().post(new EventBus());
+                    }
+                });
+
         qBadgeView = new QBadgeView(this);
         qBadgeView
                 .bindTarget(tabItems.get(3).getView(this))
@@ -81,12 +100,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         }
                     }
                 });
-        tabItems.get(2).getView(this).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         tabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override

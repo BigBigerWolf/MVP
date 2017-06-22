@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -17,6 +16,9 @@ import com.example.rxretrofitdaggermvp.ui.activities.NewsDetailActivity;
 import com.example.rxretrofitdaggermvp.ui.adapters.NewsListAdapter;
 import com.example.rxretrofitdaggermvp.ui.fragments.base.BaseFragment;
 import com.example.rxretrofitdaggermvp.utils.Constant;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -69,12 +71,14 @@ public class NewsListFragment extends BaseFragment
         onLazyLoad();
         setUpPtrFrame();
         initRecylerView();
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void initNews(NewsInfo newsInfo) {
         newData = newsInfo.getData();
         newsListAdapter.setNewData(newData);
+        recyclerView.scrollToPosition(0);
     }
 
     @Override
@@ -83,6 +87,11 @@ public class NewsListFragment extends BaseFragment
         if (isPrepared && isVisible && newData == null) {
             onLoading();
         }
+    }
+
+    @Subscribe
+    public void onEventMainThread(EventBus event) {
+        onLoading();
     }
 
     @Override
@@ -147,5 +156,11 @@ public class NewsListFragment extends BaseFragment
     public boolean onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
         newsListAdapter.remove(position);
         return true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
