@@ -8,12 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.rxretrofitdaggermvp.R;
 import com.example.rxretrofitdaggermvp.mvp.contract.NewsListContract;
 import com.example.rxretrofitdaggermvp.mvp.module.entity.NewsInfo;
 import com.example.rxretrofitdaggermvp.mvp.presenter.impl.NewsListPresenterImpl;
 import com.example.rxretrofitdaggermvp.ui.activities.NewsDetailActivity;
 import com.example.rxretrofitdaggermvp.ui.adapters.NewsListAdapter;
+import com.example.rxretrofitdaggermvp.ui.adapters.ScaleInAnimatorAdapter;
 import com.example.rxretrofitdaggermvp.ui.fragments.base.BaseFragment;
 import com.example.rxretrofitdaggermvp.utils.Constant;
 
@@ -125,11 +127,17 @@ public class NewsListFragment extends BaseFragment
 
     private void initRecylerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        newsListAdapter.bindToRecyclerView(recyclerView);
-        newsListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
-        newsListAdapter.isFirstOnly(false);
+
+//        newsListAdapter.bindToRecyclerView(recyclerView);
+//        newsListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+//        newsListAdapter.isFirstOnly(true);
+
+
         newsListAdapter.setOnItemClickListener(this);
         newsListAdapter.setOnItemLongClickListener(this);
+
+        ScaleInAnimatorAdapter<BaseViewHolder> animatorAdapter = new ScaleInAnimatorAdapter<>(newsListAdapter, recyclerView);
+        recyclerView.setAdapter(animatorAdapter);
     }
 
     @Override
