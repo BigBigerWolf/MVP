@@ -124,6 +124,11 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
     }
 
     @Override
+    public void showNetFaileUI(int errorCode, String msg) {
+        // TODO: 2017/12/8 网络请求超时回调
+    }
+
+    @Override
     public void onLoading() {
 
     }

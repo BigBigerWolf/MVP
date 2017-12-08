@@ -15,7 +15,7 @@
  *   limitations under the License.
  *  *****************************************************************************
  */
-package com.yunke.xiaovo.adapter;
+package com.example.rxretrofitdaggermvp.ui.adapters;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;

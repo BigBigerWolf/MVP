@@ -8,7 +8,7 @@ import com.example.rxretrofitdaggermvp.mvp.presenter.base.BasePresenterImpl;
 
 import javax.inject.Inject;
 
-import rx.Subscription;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by MrKong on 2017/4/2.
@@ -27,7 +27,7 @@ public class  NewsListPresenterImpl extends BasePresenterImpl<NewsListContract.V
     @Override
     public void loadNews(String newsType) {
         view.onLoading();
-        Subscription subscription = interactor.requestNewsList(newsType, this);
+        Disposable subscription = interactor.requestNewsList(newsType, this);
         subForUnSubscribes.add(subscription);
     }
 

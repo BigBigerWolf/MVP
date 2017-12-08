@@ -26,4 +26,11 @@ public interface BaseView {
      * @param msg 错误信息
      */
     void showMessage(int errorCode, String msg);
+
+    /**
+     * 接口超时回调
+     * @param errorCode
+     * @param msg
+     */
+    void showNetFaileUI(int errorCode, String msg);
 }

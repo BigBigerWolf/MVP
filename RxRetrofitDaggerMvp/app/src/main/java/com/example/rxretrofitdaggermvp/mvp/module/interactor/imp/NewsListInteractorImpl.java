@@ -1,18 +1,17 @@
 package com.example.rxretrofitdaggermvp.mvp.module.interactor.imp;
 
-import com.example.rxretrofitdaggermvp.manager.HttpManager;
+import com.example.rxretrofitdaggermvp.manager.RequestManager;
 import com.example.rxretrofitdaggermvp.mvp.module.entity.BaseResponse;
 import com.example.rxretrofitdaggermvp.mvp.module.entity.NewsInfo;
 import com.example.rxretrofitdaggermvp.mvp.module.interactor.NewsListInteractor;
 import com.example.rxretrofitdaggermvp.subsriber.ResponseSubscriber;
+import com.example.rxretrofitdaggermvp.utils.ApiService;
 import com.example.rxretrofitdaggermvp.utils.Constant;
 
 import javax.inject.Inject;
 
-import rx.Observable;
-import rx.Subscription;
-
-import static com.example.rxretrofitdaggermvp.manager.HttpManager.getCacheControl;
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by MrKong on 2017/4/2.
@@ -20,21 +19,26 @@ import static com.example.rxretrofitdaggermvp.manager.HttpManager.getCacheContro
 
 public class NewsListInteractorImpl implements NewsListInteractor {
 
-    HttpManager httpManager;
+    private RequestManager requestManager;
 
     @Inject
-    public NewsListInteractorImpl(HttpManager httpManager) {
-        this.httpManager = httpManager;
+    public NewsListInteractorImpl(RequestManager requestManager) {
+        this.requestManager = requestManager;
     }
 
     @Override
-    public Subscription requestNewsList(String newsType, final NewsListFragmentRequestCallBack callBack) {
-        Observable<BaseResponse<NewsInfo>> observable = httpManager.getApiService().getNews(getCacheControl(), newsType, Constant.KEY);
-        return httpManager.getSubscribtion(observable, new ResponseSubscriber<NewsInfo>(callBack) {
-            @Override
-            public void onSuccess(NewsInfo newsInfo) {
-                callBack.onSucess(newsInfo);
-            }
-        });
+    public Disposable requestNewsList(String newsType, final NewsListFragmentRequestCallBack callBack) {
+        ApiService apiService = requestManager.createApiService(ApiService.class);
+        Observable<BaseResponse<NewsInfo>> observable = apiService.getNews(newsType, Constant.KEY);
+        return requestManager
+                .setConnectTimeout(10)
+                .setReadTimeout(10)
+                .setWriteTimeout(10)
+                .getDisposable(observable, new ResponseSubscriber<BaseResponse<NewsInfo>>(callBack) {
+                    @Override
+                    public void onSuccess(BaseResponse<NewsInfo> newsInfoBaseResponse) {
+                        callBack.onSucess(newsInfoBaseResponse.getResult());
+                    }
+                });
     }
 }

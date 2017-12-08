@@ -15,13 +15,15 @@
  *   limitations under the License.
  *  *****************************************************************************
  */
-package com.yunke.xiaovo.adapter;
+package com.example.rxretrofitdaggermvp.ui.adapters;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.example.rxretrofitdaggermvp.ui.adapters.AnimatorAdapter;
 
 /**
  * An implementation of the AnimatorAdapter class which applies a

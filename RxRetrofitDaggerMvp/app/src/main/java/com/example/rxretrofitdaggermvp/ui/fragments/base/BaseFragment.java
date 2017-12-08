@@ -114,6 +114,11 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     }
 
     @Override
+    public void showNetFaileUI(int errorCode, String msg) {
+        // TODO: 2017/12/8 网络请求超时回调
+    }
+
+    @Override
     public void onLoading() {
 
     }

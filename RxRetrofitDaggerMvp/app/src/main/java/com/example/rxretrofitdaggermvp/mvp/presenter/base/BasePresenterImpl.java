@@ -7,7 +7,11 @@ import com.example.rxretrofitdaggermvp.utils.Constant;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Subscription;
+import io.reactivex.disposables.Disposable;
+
+import static com.example.rxretrofitdaggermvp.utils.Constant.CONNET_EXCEPTION;
+import static com.example.rxretrofitdaggermvp.utils.Constant.REQUEST_TIME_OUT;
+import static com.example.rxretrofitdaggermvp.utils.Constant.TOKENTIMEOUT;
 
 /**
  * Created by MrKong on 2017/4/1.
@@ -18,9 +22,9 @@ public abstract class BasePresenterImpl<T extends BaseView> implements BasePrese
     protected T view;
 
     /**
-     *  for cancle multi subscribers.
+     * for cancle multi subscribers.
      */
-    protected List<Subscription> subForUnSubscribes = new ArrayList<>();
+    protected List<Disposable> subForUnSubscribes = new ArrayList<>();
 
     @Override
     public void setView(T baseView) {
@@ -31,10 +35,10 @@ public abstract class BasePresenterImpl<T extends BaseView> implements BasePrese
 
     @Override
     public void destroy() {
-        for (Subscription subscription :
+        for (Disposable subscription :
                 subForUnSubscribes) {
-            if (subscription != null && !subscription.isUnsubscribed()) {
-                subscription.unsubscribe();
+            if (subscription != null && !subscription.isDisposed()) {
+                subscription.dispose();
             }
         }
         subForUnSubscribes.clear();
@@ -43,9 +47,15 @@ public abstract class BasePresenterImpl<T extends BaseView> implements BasePrese
     @Override
     public void onError(int errorCode, String msg) {
         view.hideLoading();
-        if (errorCode == Constant.TOKENTIMEOUT) {
-            view.goToLogin();
-        }
         view.showMessage(errorCode, msg);
+        switch (errorCode) {
+            case REQUEST_TIME_OUT:
+            case CONNET_EXCEPTION:
+                view.showNetFaileUI(errorCode, msg);
+                break;
+            case TOKENTIMEOUT:
+                view.goToLogin();
+                break;
+        }
     }
 }

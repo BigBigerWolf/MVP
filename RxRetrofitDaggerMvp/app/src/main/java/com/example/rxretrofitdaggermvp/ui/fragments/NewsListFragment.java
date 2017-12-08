@@ -80,7 +80,7 @@ public class NewsListFragment extends BaseFragment
     public void initNews(NewsInfo newsInfo) {
         newData = newsInfo.getData();
         newsListAdapter.setNewData(newData);
-        recyclerView.scrollToPosition(0);
+        recyclerView.smoothScrollToPosition(0);
     }
 
     @Override
@@ -131,8 +131,6 @@ public class NewsListFragment extends BaseFragment
 //        newsListAdapter.bindToRecyclerView(recyclerView);
 //        newsListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
 //        newsListAdapter.isFirstOnly(true);
-
-
         newsListAdapter.setOnItemClickListener(this);
         newsListAdapter.setOnItemLongClickListener(this);
 
