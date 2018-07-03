@@ -12,15 +12,15 @@ import javax.inject.Inject;
 
 public class MainPresenterImpl extends BasePresenterImpl<MainContract.View> {
 
-    private final MainInteractorImpl interactor;
+    private MainInteractorImpl mInteractor;
 
     @Inject
     public MainPresenterImpl(MainInteractorImpl interactor) {
-        this.interactor = interactor;
+        this.mInteractor = interactor;
     }
 
     @Override
     public void initialize() {
-        view.initTabHost(interactor.getTabData());
+        mView.initTabHost(mInteractor.getTabData());
     }
 }

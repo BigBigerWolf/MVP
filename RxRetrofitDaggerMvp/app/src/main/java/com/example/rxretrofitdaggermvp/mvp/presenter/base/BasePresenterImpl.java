@@ -2,11 +2,11 @@ package com.example.rxretrofitdaggermvp.mvp.presenter.base;
 
 import com.example.rxretrofitdaggermvp.listener.OnErrorCallBack;
 import com.example.rxretrofitdaggermvp.mvp.view.base.BaseView;
-import com.example.rxretrofitdaggermvp.utils.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 import static com.example.rxretrofitdaggermvp.utils.Constant.CONNET_EXCEPTION;
@@ -19,42 +19,42 @@ import static com.example.rxretrofitdaggermvp.utils.Constant.TOKENTIMEOUT;
 //相同逻辑的统一处理
 public abstract class BasePresenterImpl<T extends BaseView> implements BasePresenter<T>, OnErrorCallBack {
 
-    protected T view;
+    protected T mView;
 
     /**
      * for cancle multi subscribers.
      */
-    protected List<Disposable> subForUnSubscribes = new ArrayList<>();
+    protected CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     @Override
     public void setView(T baseView) {
-        view = baseView;
+        mView = baseView;
     }
 
+    /**
+     * 默认初始化方法
+     */
+    @Override
     public abstract void initialize();
 
     @Override
     public void destroy() {
-        for (Disposable subscription :
-                subForUnSubscribes) {
-            if (subscription != null && !subscription.isDisposed()) {
-                subscription.dispose();
-            }
-        }
-        subForUnSubscribes.clear();
+        mCompositeDisposable.dispose();
     }
 
     @Override
     public void onError(int errorCode, String msg) {
-        view.hideLoading();
-        view.showMessage(errorCode, msg);
+        mView.hideLoading();
+        mView.showMessage(errorCode, msg);
         switch (errorCode) {
             case REQUEST_TIME_OUT:
             case CONNET_EXCEPTION:
-                view.showNetFaileUI(errorCode, msg);
+                mView.showNetFaileUI(errorCode, msg);
                 break;
             case TOKENTIMEOUT:
-                view.goToLogin();
+                mView.goToLogin();
+                break;
+            default:
                 break;
         }
     }

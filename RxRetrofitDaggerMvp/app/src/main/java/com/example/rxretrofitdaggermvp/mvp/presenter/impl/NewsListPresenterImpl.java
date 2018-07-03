@@ -26,9 +26,9 @@ public class  NewsListPresenterImpl extends BasePresenterImpl<NewsListContract.V
 
     @Override
     public void loadNews(String newsType) {
-        view.onLoading();
+        mView.onLoading();
         Disposable subscription = interactor.requestNewsList(newsType, this);
-        subForUnSubscribes.add(subscription);
+        mCompositeDisposable.add(subscription);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class  NewsListPresenterImpl extends BasePresenterImpl<NewsListContract.V
 
     @Override
     public void onSucess(NewsInfo newsInfo) {
-        view.hideLoading();
-        view.initNews(newsInfo);
+        mView.hideLoading();
+        mView.initNews(newsInfo);
     }
 }
