@@ -12,6 +12,8 @@ import com.ihsanbal.logging.LoggingInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -37,7 +39,7 @@ public class RequestManager {
     private int mReadTimeout;
     private int mWriteTimeout;
 
-    public RequestManager() {
+    public RequestManager(RetrofitManager retrofitManager) {
         LoggingInterceptor loggingInterceptor = new LoggingInterceptor.Builder()
                 .loggable(Constant.isDebug)
                 .setLevel(Level.BASIC)
@@ -47,13 +49,13 @@ public class RequestManager {
                 .addHeader("version", BuildConfig.VERSION_NAME)
                 .build();
 
-        retrofit = new RetrofitManager()
+        retrofit = retrofitManager
                 .baseUrl(Constant.BASE_URL)
                 .writeTimeout(mWriteTimeout, TimeUnit.SECONDS)
                 .readTimeout(mReadTimeout, TimeUnit.SECONDS)
                 .connectTimeout(mConnetTimeout, TimeUnit.SECONDS)
                 .addLoggingIntercepter(loggingInterceptor)
-                .addRequestIntercepter(new RequestIntercepter())
+                .addRequestIntercepter(new RequestInterceptor())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(FastJsonConverterFactory.create())
                 .init();

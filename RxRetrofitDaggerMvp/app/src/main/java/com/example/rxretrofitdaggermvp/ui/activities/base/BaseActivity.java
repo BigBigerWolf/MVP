@@ -1,6 +1,7 @@
 package com.example.rxretrofitdaggermvp.ui.activities.base;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,9 +10,9 @@ import android.widget.Toast;
 
 import com.example.rxretrofitdaggermvp.MyApp;
 import com.example.rxretrofitdaggermvp.R;
-import com.example.rxretrofitdaggermvp.injector.module.ActivityModule;
 import com.example.rxretrofitdaggermvp.injector.component.ActivityComponent;
-import com.example.rxretrofitdaggermvp.injector.component.DaggerActivityComponent;
+import com.example.rxretrofitdaggermvp.injector.component.DaggerAppComponent;
+import com.example.rxretrofitdaggermvp.injector.module.AppModule;
 import com.example.rxretrofitdaggermvp.manager.AppManager;
 import com.example.rxretrofitdaggermvp.mvp.presenter.base.BasePresenter;
 import com.example.rxretrofitdaggermvp.mvp.view.base.BaseView;
@@ -28,7 +29,16 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
     protected BasePresenter basePresenter;
 
     @Inject
-    AppManager appManager;
+    protected AppManager appManager;
+
+    @Inject
+    protected Toast toast;
+
+    @Inject
+    protected Context context;
+
+    @Inject
+    protected MyApp myApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +75,8 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
         }
     }
 
-    protected void getBundle(Bundle bundle) {}
+    protected void getBundle(Bundle bundle) {
+    }
 
     protected abstract int getLayoutId();
 
@@ -78,10 +89,11 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
     }
 
     private void initActivityComponent() {
-        activityComponent = DaggerActivityComponent.builder()
-                .appComponent(((MyApp) getApplication()).getAppComponent())
-                .activityModule(new ActivityModule(this))
-                .build();
+        activityComponent = DaggerAppComponent
+                .builder()
+                .appModule(new AppModule(this, (MyApp) MyApp.getAppContext()))
+                .build()
+                .getActivityComponent();
     }
 
     protected void readyGo(Class<?> clazz) {
@@ -140,7 +152,8 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
 
     @Override
     public void showMessage(int errorCode, String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        toast.setText(msg);
+        toast.show();
     }
 
     @Override

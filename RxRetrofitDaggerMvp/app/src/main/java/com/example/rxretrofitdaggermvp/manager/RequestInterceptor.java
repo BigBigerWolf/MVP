@@ -22,7 +22,7 @@ import okio.Buffer;
  * 监测超时时间，获取参数，url，参数加密
  */
 
-public class RequestIntercepter implements Interceptor {
+public class RequestInterceptor implements Interceptor {
 
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {

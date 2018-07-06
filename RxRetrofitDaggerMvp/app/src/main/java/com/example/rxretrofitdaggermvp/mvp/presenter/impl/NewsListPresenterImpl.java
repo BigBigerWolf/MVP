@@ -14,14 +14,14 @@ import io.reactivex.disposables.Disposable;
  * Created by MrKong on 2017/4/2.
  */
 
-public class  NewsListPresenterImpl extends BasePresenterImpl<NewsListContract.View>
+public class NewsListPresenterImpl extends BasePresenterImpl<NewsListContract.View>
         implements NewsListContract.Presenter, NewsListInteractor.NewsListFragmentRequestCallBack {
 
-    private final NewsListInteractorImpl interactor;
+    @Inject
+    NewsListInteractorImpl interactor;
 
     @Inject
-    public NewsListPresenterImpl(NewsListInteractorImpl interactor) {
-        this.interactor = interactor;
+    NewsListPresenterImpl() {
     }
 
     @Override

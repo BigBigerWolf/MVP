@@ -1,5 +1,6 @@
 package com.example.rxretrofitdaggermvp.injector.component;
 
+import com.example.rxretrofitdaggermvp.injector.module.AppModule;
 import com.example.rxretrofitdaggermvp.injector.module.FragmentModule;
 import com.example.rxretrofitdaggermvp.injector.scope.PerFragment;
 import com.example.rxretrofitdaggermvp.ui.fragments.NewsListFragment;
@@ -11,16 +12,16 @@ import com.example.rxretrofitdaggermvp.ui.fragments.Tab4Fragment;
 import dagger.Component;
 
 /**
- * Created by MrKong on 2017/4/1.
+ * 依赖于{@link AppComponent}, 同时可以提供{@link AppModule}和{@link FragmentModule}中提供的对象。
+ *
+ * @author MrKong
+ * @date 2017/4/1
  */
 
 @PerFragment
 @Component(dependencies = AppComponent.class, modules = FragmentModule.class)
 public interface FragmentComponent {
-    // 将Fragment注入进来，
-    // 它会先去Fragment的Module中查找带有@Provides注解的对象，如果找到了Fragment中带有@Inject注解的对象则成功注入，
-    // 否则去该对象中寻找带有@Inject注解的构造，找到则成功注入，
-    // 否则失败。
+
     void inject(Tab1Fragment tab1Fragment);
 
     void inject(Tab3Fragment tab3Fragment);

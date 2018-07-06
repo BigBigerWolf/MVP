@@ -1,6 +1,7 @@
 package com.example.rxretrofitdaggermvp.ui.fragments.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,10 +32,19 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     protected View contentView;
     protected BasePresenter basePresenter;
     protected boolean isVisible;
-    protected String TAG;
+    protected static String TAG;
 
     @Inject
-    Activity activity;
+    protected Toast toast;
+
+    @Inject
+    protected Activity activity;
+
+    @Inject
+    protected Context context;
+
+    @Inject
+    protected MyApp myApp;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -143,6 +153,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void showMessage(int errorCode, String msg) {
-        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
+        toast.setText(msg);
+        toast.show();
     }
 }

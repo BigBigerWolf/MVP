@@ -21,12 +21,13 @@ public class MyClickListener {
     private OnClickListener onClickListener;
 
     /**
-     * @param num 设置触发连续点击事件的次数
+     * @param num  设置触发连续点击事件的次数
      * @param view 需要被点击的view
      */
     public MyClickListener(int num, View view) {
         this.mNum = num;
         this.mView = view;
+
     }
 
     private void click() {

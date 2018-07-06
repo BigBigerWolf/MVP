@@ -6,16 +6,17 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by MrKong on 2017/4/1.
  */
 
 public class AppManager {
-    private Context context;
     private List<Activity> mActivities = new ArrayList<>();
 
-    public AppManager(Context context) {
-        this.context = context;
+    @Inject
+    public AppManager() {
     }
 
     public void addAcitivty(Activity activity) {

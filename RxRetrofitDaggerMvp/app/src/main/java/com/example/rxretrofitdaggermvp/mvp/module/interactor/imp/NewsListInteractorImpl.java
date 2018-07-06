@@ -19,11 +19,11 @@ import io.reactivex.disposables.Disposable;
 
 public class NewsListInteractorImpl implements NewsListInteractor {
 
-    private RequestManager requestManager;
+    @Inject
+    RequestManager requestManager;
 
     @Inject
-    public NewsListInteractorImpl(RequestManager requestManager) {
-        this.requestManager = requestManager;
+    public NewsListInteractorImpl() {
     }
 
     @Override

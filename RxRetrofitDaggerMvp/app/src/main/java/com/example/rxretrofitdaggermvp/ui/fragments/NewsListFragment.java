@@ -1,7 +1,5 @@
 package com.example.rxretrofitdaggermvp.ui.fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,10 +43,6 @@ public class NewsListFragment extends BaseFragment
     RecyclerView recyclerView;
     @Bind(R.id.ptr_frame)
     PtrClassicFrameLayout ptrFrame;
-    @Inject
-    Context context;
-    @Inject
-    Activity activity;
     @Inject
     NewsListPresenterImpl newsListPresenter;
     @Inject

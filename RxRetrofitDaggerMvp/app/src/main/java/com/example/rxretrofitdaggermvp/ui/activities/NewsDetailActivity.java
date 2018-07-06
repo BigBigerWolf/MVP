@@ -2,7 +2,6 @@ package com.example.rxretrofitdaggermvp.ui.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -63,9 +62,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         toolbar.setNavigationOnClickListener(this);
         toolbar.inflateMenu(R.menu.info);
         toolbar.setOnMenuItemClickListener(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
 
     private void initViews() {

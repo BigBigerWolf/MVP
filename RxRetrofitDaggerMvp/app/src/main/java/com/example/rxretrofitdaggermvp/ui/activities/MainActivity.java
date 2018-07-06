@@ -13,6 +13,7 @@ import com.example.rxretrofitdaggermvp.mvp.contract.MainContract;
 import com.example.rxretrofitdaggermvp.mvp.module.entity.TabItem;
 import com.example.rxretrofitdaggermvp.mvp.presenter.impl.MainPresenterImpl;
 import com.example.rxretrofitdaggermvp.ui.activities.base.BaseActivity;
+import com.example.rxretrofitdaggermvp.utils.ForTestCommonComponent;
 import com.example.rxretrofitdaggermvp.utils.MyClickListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -69,7 +70,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         tabhost.getTabWidget().getChildTabViewAt(2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_SHORT).show();
+//                toast.setText("点击啦。");
+//                toast.show();
+                new ForTestCommonComponent().showToast("点击啦。");
             }
         });
 
@@ -102,6 +105,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                                 break;
                             case STATE_CANCELED:
                                 Toast.makeText(MainActivity.this, "cancle", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
                                 break;
                         }
                     }
